@@ -20,5 +20,5 @@ def run_backtest(df: pd.DataFrame, initial_capital: float = 100000.0) -> pd.Data
     df["strategy"] = df["returns"] * df["signal"].shift(1)
     df["equity"] = (1 + df["strategy"]).cumprod() * initial_capital
     df["benchmark"] = (1 + df["returns"]).cumprod() * initial_capital
-    
+    df.dropna(inplace=True)
     return df
